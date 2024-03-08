@@ -1,0 +1,79 @@
+{% extends 'agencyindex.html '%}
+{% block content %}
+
+
+
+<div class="container mt-5 mb-5">
+    <br><br>
+    <h1>Stock List</h1>
+    {% for message in messages  %}
+    <h6 style="color:red">{{message}}</h6>
+        
+    {% endfor %}
+    <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm" ><i class="bi bi-plus"></i> Request Stock</button>
+    <br><br>
+    <table class="table">
+        <tr>
+            <th>Gas</th>
+            
+            <th>Last Updated</th>
+            <th>Stock</th>
+            <th>Approval</th>
+            <th>Delete</th>
+        </tr>
+        {% for g in gas %}
+        <tr>
+            <th>{{g.Gas}}</th>
+            
+            <th>{{g.last_updated}}</th>
+            <th>{{g.stock}}</th>
+            <th>
+                {% if g.appovel == True %}
+                <span class="badge bg-success">Approved</span>
+                {% else %}
+                <span class="badge bg-warning">Pending....</span>
+
+                {% endif %}
+            </th>
+            <th>
+                <!-- <a href="" class="btn btn-danger btn-sm">delete</a> -->
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title text-info fs-5" id="exampleModalLabel">Add A cylinder</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form  method="post">
+            
+                {% csrf_token %}
+            
+                {% for field in form %}
+                {{field.label}} <br>
+                {{field}}
+    
+                {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    
+    <title>Gas-Book-Login</title>
+</head>
+<body>
+    <div class="log">
+        <section class="loginUser">
+        <!--avatar - icon font awesome-->
+        <i class="fa fa-user fa-5x"></i>
+        
+        <!--Call to action--> 
+        <h3>Sign in to Gas Booking</h3>
+
+        {% for message in messages  %}
+            <h6 style="color:red">{{message}}</h6>   
+        {% endfor %}
+        
+        </section>
+        
+        <!--form-->
+        
+        <div class="formUser">
+        <form method="post"> <!--meaning: action - link for the place where the form should be reported. Method "get or post" GET: the submitted form data will be visible in the page address field. Never use GET to send sensitive data! (will be visible in the URL) POST: Always use POST if the form data contains sensitive or personal information. The POST method does not display the submitted form data in the page address field.
+        
+         -->
+        {% csrf_token %}
+            <label for="login">User name</label>
+            <br>
+          <input type="text" name="uname" required autofocus autocomplete> <!--AUTOFOCUS specifies that the input field should automatically get focus when the page loads. AUTOCOMPLETE:When autocomplete is on, the browser automatically completes the input values based on values that the user has entered before.-->
+            <br>
+            
+          <label for="password">Password</label>
+            <br>
+            <input type="password" name="pswd" required >
+            <br><br>
+            <button class="butLog" type="submit" value="Login">Login</button>
+            <!-- <a href="#">Forgot password?</a> -->
+            
+        </form>
+        </div>
+        
+        <br>
+        
+        <div class="MoreInfo" style="background-color:#ffff !important;">
+            <p>New to Gas Booking? <a href="{%url 'SignUp' %}">Create an account</a>.</p>
+        </div>
+        
+        <div id="footer">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Security</a>
+            <a href="#">Contact MyWebsite</a> 
+        </div>
+        
+        </div>
+</body>
+</html>

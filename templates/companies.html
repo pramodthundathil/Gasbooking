@@ -1,0 +1,29 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="mt-5 mb-5"></div>
+    <br><br>
+    <h4 class="text-center text-dark mt-5">Company List</h4>
+    {% for message in messages  %}
+    <h6 style="color:red">{{message}}</h6>   
+{% endfor %}
+
+    <table class="table">
+        <tr>
+            <th>Comapany Name</th>
+            <th>Company Email</th>
+            <th>Last Login</th>
+            <th>Action</th>
+        </tr>
+        {% for com in companies%}
+        <tr>
+            <td>{{com.first_name}}</td>
+            <td>{{com.email}}</td>
+            <td>{{com.last_login}}</td>
+            <td><a href="{%url 'DeleteCompany' com.id %}" class="btn btn-danger btn-sm">delele</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'oilcompanyindex.html' %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <br><br>
+    <h1>Agency Refill Requests</h1>
+    {% for message in messages  %}
+    <h6 style="color:red">{{message}}</h6>
+        
+    {% endfor %}
+    <!-- <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm" ><i class="bi bi-plus"></i> Add Cylinder</button> -->
+    <br><br>
+    <table class="table">
+        <tr>
+            <th>Agency</th>
+            <th>Gas</th>
+            
+            <th>Last Updated</th>
+            <th>Stock</th>
+            <th>Approval</th>
+            <th>Approve</th>
+            <th>Delete</th>
+        </tr>
+        {% for g in gas %}
+        <tr>
+            <th>{{g.user}}</th>
+            <th>{{g.Gas}}</th>
+            
+            <th>{{g.last_updated}}</th>
+            <th>{{g.stock}}</th>
+            <th>
+                {% if g.appovel == True %}
+                <span class="badge bg-success">Approved</span>
+                {% else %}
+                <span class="badge bg-warning">Pending....</span>
+
+                {% endif %}
+            </th>
+            <th>
+                {%  if g.appovel == False %}
+
+                <form  method="post" action="{%url 'ApproveRefillRequest' g.id%}">
+                    
+                    {% csrf_token %}
+                    Enter Selling Price Of cylinder: <br>
+                    <input type="text" name="price" placeholder="Selling Price" required>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-success btn-sm">Approve</button>
+
+                </form>
+            {% endif%}
+                
+            </th>
+            <th>
+                <a href="" class="btn btn-danger btn-sm">delete</a>
+            </th>
+        </tr>
+        
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+
+  <!-- Modal -->
+  
+{% endblock %}
